@@ -26,10 +26,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/OWLScrape");
 
 // Routes
+
+app.get("/", function(req, res){
+  res.render("index");
+})
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
