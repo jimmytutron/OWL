@@ -7,20 +7,18 @@
             </div>
             <div class="modal-body">
                 {{#if this.notes}}
-                    {{#each this.notes}}
-                                <p> {{this.body}}</p>
-                                <button type="button" class="btn btn-danger deleteNote" data-note-id={{this._id}} data-article-id={{this.article}}>X</button>
-                    {{/each}}
+                                <p class="note-{{this._id}}"></p>
                 {{else}}
                             <h4>No notes for this post yet.</h4>
                 {{/if}}
                 <div class="form-group">
-                    <textarea id="noteText{{this._id}}" class="form-control" rows="4" placeholder="New Note"></textarea>
+                    <textarea id="bodyinput" class="form-control" rows="4" name="body" placeholder="Make a note here!"></textarea>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary saveNote" data-id={{this._id}}>Save Note</button>
+                <button type="button" class="btn btn-primary save-note" data-id={{this._id}}>Save Notes</button>
+                <div class="no-text"></div>
             </div>
         </div>
     </div>

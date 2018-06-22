@@ -28,45 +28,33 @@ $(".delete").on("click", function(){
 	});
 });
 
-$(document).on("click", "h3", function(){
-	$("#note").empty();
+$(".view-note").on("click", function(){
 	var thisId = $(this).attr("data-id");
-
 	$.ajax({
 		method: "GET",
-		url: "/articles/" + thisId
-	})
-	.then(function(data){
-		console.log(data);
-		$("#note").html(`
-			<h5>${data.title}</h5>
-			<input id="titleinput" name="title">
-			<textarea id="bodyinput" name="body"></textarea><br>
-			<button class="btn btn-primary" data-id="${data._id}" id="savenote">Save Note</button>
-			`)
-	if (data.note){
-		$("#titleinput").val(data.note.title);
-		$("#bodyinput").val(data.note.body);
-	}
+		url: "/saved-posts/" + thisId
+	}).then(function(data){
+		console.log(data.notes.body);
+		$(".note-" + thisId).append(data.notes.body);
 	});
 });
 
-$(document).on("click", "#savenote", function(){
+$(".save-note").on("click", function(){
 	var thisId = $(this).attr("data-id");
-
-	$.ajax({
-		method: "POST",
-		url: "/articles/" + thisId,
-		data: {
-			title: $("#titleinput").val(),
-			body: $("#bodyinput").val()
-		}
-	})
-	.then(function(data){
-		console.log(data);
-		$("#note").empty();
-	});
-
-	$("#titleinput").val("");
-	$("#bodyinput").val("");
+	if(!$("#bodyinput").val()){
+		$(".no-text").html(`<br><p class="text-muted">You didn't type anything...</p>`);
+	}
+	else{
+		$.ajax({
+			method: "POST",
+			url: "/saved-posts/" + thisId,
+			data: {
+				body: $("#bodyinput").val()
+			}
+		}).then(function(data){
+			console.log(data);
+			location.reload();
+		});
+	}
 });
+
