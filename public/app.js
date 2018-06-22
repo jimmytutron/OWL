@@ -3,7 +3,7 @@ $.getJSON("/articles", function(data){
 		$("#articles").append(`
  	<div class="row justify-content-center">
 		<div class="col-12">
-			<h1 data-id="${data[i]._id}">${data[i].title}</h1>
+			<h3 data-id="${data[i]._id}">${data[i].title}</h3>
 			<a href="${data[i].link}">View Post</a>
 		</div>
 	</div>
@@ -11,3 +11,21 @@ $.getJSON("/articles", function(data){
 	}
 });
 
+$(document).on("click", "h3", function(){
+	$("#notes").empty();
+	var thisId = $(this).attr("data-id");
+
+	$.ajax({
+		method: "GET",
+		url: "/articles/" + thisId
+	})
+	.then(function(data){
+		console.log(data);
+		$("#note").html(`
+			<h5>${data.title}</h5>
+			<input id="titleinput" name="title">
+			<textarea id="bodyinput" name="body"></textarea><br>
+			<button class="btn btn-primary" data-id="${data._id}" id="savenote">Save Note</button>
+			`)
+	})
+})
