@@ -40,8 +40,14 @@ mongoose.connect(MONGODB_URI);
 // Routes
 
 app.get("/", function(req, res){
-  res.render("index");
-})
+  db.Article.find({}, function(err, data){
+    var reddit = {
+      article: data
+    };
+    console.log(reddit);
+    res.render("index", reddit);
+  });
+});
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
