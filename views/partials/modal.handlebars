@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 {{#if this.notes}}
-                                <p class="note-{{this._id}}"></p>
+                                <p class="note"></p>
                 {{else}}
                             <h4>No notes for this post yet.</h4>
                 {{/if}}
@@ -17,7 +17,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary save-note" data-id={{this._id}}>Save Notes</button>
+                <button type="button" class="btn btn-primary save-note" data-id="{{this._id}}">Save Notes</button>
                 <div class="no-text"></div>
             </div>
         </div>

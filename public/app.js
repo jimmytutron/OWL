@@ -34,8 +34,8 @@ $(".view-note").on("click", function(){
 		method: "GET",
 		url: "/saved-posts/" + thisId
 	}).then(function(data){
-		console.log(data.notes.body);
-		$(".note-" + thisId).append(data.notes.body);
+		console.log(data.notes);
+		$(".note").text(data.notes.body);
 	});
 });
 
