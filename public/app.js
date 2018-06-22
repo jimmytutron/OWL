@@ -29,7 +29,7 @@ $(".delete").on("click", function(){
 });
 
 $(document).on("click", "h3", function(){
-	$("#notes").empty();
+	$("#note").empty();
 	var thisId = $(this).attr("data-id");
 
 	$.ajax({
