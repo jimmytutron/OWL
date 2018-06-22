@@ -49,6 +49,16 @@ app.get("/", function(req, res){
   });
 });
 
+app.get("/saved-posts", function(req, res){
+  db.Article.find({saved:true}, function(err, data){
+    var saved = {
+      article: data
+    };
+    console.log(saved);
+    res.render("saved-posts", saved);
+  });
+});
+
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
@@ -127,8 +137,36 @@ app.get("/articles/:id", function(req, res) {
   });
 });
 
+
+//Route for saving an article
+app.post("/articles/save/:id", function(req, res){
+  db.Article.findOneAndUpdate(
+    { _id: req.params.id },
+    { saved: true})
+  .then(function(dbArticle){
+    res.json(dbArticle);
+  })
+  .catch(function(err){
+    res.json(err);
+  });
+});
+
+//unsave an article
+app.post("/articles/remove/:id", function(req, res){
+  db.Article.findOneAndUpdate(
+    { _id: req.params.id},
+    { saved: false,
+      notes: []})
+  .then(function(dbArticle){
+    res.json(dbArticle);
+  })
+  .catch(function(err){
+    res.json(err);
+  });
+});
+
 // Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function(req, res) {
+app.post("/articles/add-note/:id", function(req, res) {
   console.log(req.body);
   // TODO
   // ====
@@ -148,6 +186,7 @@ app.post("/articles/:id", function(req, res) {
     res.json(err);
   });
 });
+
 
 // Start the server
 app.listen(PORT, function() {
