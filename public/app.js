@@ -13,10 +13,20 @@ $(".save").on("click", function(){
 		method: "POST",
 		url: "/articles/save/" + thisId
 	}).then(function(data){
-		console.log("saved!")
+		console.log("saved!");
 	});
 });
 
+$(".delete").on("click", function(){
+	var thisId = $(this).attr("data-id");
+	$.ajax({
+		method: "POST",
+		url: "/articles/remove/" + thisId
+	}).then(function(data){
+		console.log("removed");
+		location.reload();
+	});
+});
 
 $(document).on("click", "h3", function(){
 	$("#notes").empty();
