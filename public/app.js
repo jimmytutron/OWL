@@ -27,5 +27,29 @@ $(document).on("click", "h3", function(){
 			<textarea id="bodyinput" name="body"></textarea><br>
 			<button class="btn btn-primary" data-id="${data._id}" id="savenote">Save Note</button>
 			`)
+	if (data.note){
+		$("#titleinput").val(data.note.title);
+		$("#bodyinput").val(data.note.body);
+	}
+	});
+});
+
+$(document).on("click", "#savenote", function(){
+	var thisId = $(this).attr("data-id");
+
+	$.ajax({
+		method: "POST",
+		url: "/articles/" + thisId,
+		data: {
+			title: $("#titleinput").val(),
+			body: $("#bodyinput").val()
+		}
 	})
-})
+	.then(function(data){
+		console.log(data);
+		$("#note").empty();
+	});
+
+	$("#titleinput").val("");
+	$("#bodyinput").val("");
+});
