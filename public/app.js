@@ -7,6 +7,17 @@ $("#scrape").on("click", function(){
 	});
 });
 
+$(".save").on("click", function(){
+	var thisId = $(this).attr("data-id");
+	$.ajax({
+		method: "POST",
+		url: "/articles/save/" + thisId
+	}).then(function(data){
+		console.log("saved!")
+	});
+});
+
+
 $(document).on("click", "h3", function(){
 	$("#notes").empty();
 	var thisId = $(this).attr("data-id");
