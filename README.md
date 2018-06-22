@@ -18,7 +18,7 @@ Inside your terminal or command prompt, navigate to the location of the cloned r
 npm i
 ```
 
-### mongoDB :leaf:
+### mongoDB :herb:
 In order for the app to render locally, you will need to have mongoDB installed on your computer. Depending on your operating system, the installation proccess will be different. You can find more info on installing mongoDB through their documentation.
 ```
 https://docs.mongodb.com/manual/installation/
