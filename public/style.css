@@ -1,5 +1,23 @@
 body {
     color: black;
+    background: url('https://3.bp.blogspot.com/--_pqwcg_gIc/V0sP9flwrKI/AAAAAAAAHbY/uHifVE6CdvEAzvgxFC_0m1Y5dm6yBIuMgCKgB/s1600/2.jpg') fixed;
+    background-position: top;
+    background-size: cover;
+}
+
+.container{
+	border-radius: 20px;
+	background-color: #000;
+	opacity: 0.8;
+	margin-top: -30px;
+	color: #fff;
+}
+
+.jumbotron {
+    background: url('https://3.bp.blogspot.com/--_pqwcg_gIc/V0sP9flwrKI/AAAAAAAAHbY/uHifVE6CdvEAzvgxFC_0m1Y5dm6yBIuMgCKgB/s1600/2.jpg') fixed;
+    background-position: top;
+    background-size: cover;
+    color: #fff;
 }
 
 textarea,

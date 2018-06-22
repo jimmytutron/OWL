@@ -1,10 +1,6 @@
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-12 col-md-10">
-			<h1 class="text-center">Overwatch Reddit Scraper</h1>
-		</div>
-	</div>
-	<div class="row justify-content-center text-center mb-5">
+{{> jumbotron}}
+<div class="container p-5">
+		    	<div class="row justify-content-center text-center mb-5">
 		<div class="col-12 col-md-10">
 			<a class="btn btn-primary" href="/">View All Posts</a>
 		</div>
@@ -17,7 +13,7 @@
 				<h5>{{this.type}}</h5>
 				<a href="{{this.link}}" target="_blank">View Reddit Post</a>
 			</div>
-			<div class="col-12 col-md-4">
+			<div class="col-12 col-md-3">
 			<button class="btn btn-info view-note" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id="{{this._id}}">View Notes</button> &nbsp;
 			<button class="btn btn-danger delete" data-id="{{this._id}}">Unsave</button>
 		</div>
