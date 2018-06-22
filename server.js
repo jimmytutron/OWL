@@ -31,7 +31,11 @@ app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/OWLScrape");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/OWLScrape";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
 
 // Routes
 
@@ -47,10 +51,11 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("a.title").each(function(i, element) {
+    $("p.title").each(function(i, element) {
       // Save an empty result object
       var result = {};
       var link = $(this)
+        .children("a")
         .attr("href");
       var url = link.indexOf(".com");
 
@@ -61,8 +66,12 @@ app.get("/scrape", function(req, res) {
       console.log(link);
       // Add the text and href of every klink, and save them as properties of the result object
       result.title = $(this)
+        .children("a")
         .text();
       result.link = link;
+      result.type = $(this)
+      .children("span.linkflairlabel")
+      .text();
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)

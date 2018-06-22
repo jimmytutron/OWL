@@ -4,6 +4,7 @@ $.getJSON("/articles", function(data){
  	<div class="row justify-content-center">
 		<div class="col-12">
 			<h3 data-id="${data[i]._id}">${data[i].title}</h3>
+			<h4>Category: ${data[i].type}</h4>
 			<a href="${data[i].link}">View Post</a>
 		</div>
 	</div>
